@@ -1,7 +1,7 @@
 // for...of
-const colores = ["Rojo", "Azul", "Verde", "Amarillo"];
+const colores = ["Amarillo", "Rojo", "Azul", "Verde","Negro"];
 for (let color of colores) {
-  console.log(color);
+  //console.log(color);
 }
 
 const iterator = colores[Symbol.iterator]();
@@ -17,7 +17,7 @@ const persona = {
 // }
 
 for (let [key, value] of Object.entries(persona)) {
-  console.log(key, value);
+  //console.log(key, value);
 }
 
 const aprender = {
@@ -27,14 +27,17 @@ const aprender = {
   css: ["Tailwind", "BEM", "SubGRID"]
 };
 
+
 aprender[Symbol.iterator] = function() {
   // Por cada matriz con herramientas, ir retornando cada una de ella
   let indiceTecnologia = 0;
   let indiceHeramienta = 0;
+
   const tecnologias = Object.values(this);
   return {
     next() {
       const tecnologia = tecnologias[indiceTecnologia];
+      // console.log(tecnologia);
 
       // Comprobar que haya más herramientas
       if (!(indiceHeramienta < tecnologia.length)) {
@@ -49,7 +52,6 @@ aprender[Symbol.iterator] = function() {
           done: true
         };
       }
-
       return {
         value: tecnologia[indiceHeramienta++],
         done: false
@@ -57,6 +59,7 @@ aprender[Symbol.iterator] = function() {
     }
   };
 };
+
 
 for (let herramienta of aprender) {
   console.log(herramienta);
