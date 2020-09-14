@@ -1,4 +1,8 @@
 
-node_modules/*
+JavaScript/node_modules/*
 
-package-lock.json
+JavaScript/package-lock.json
+
+VueJs/node_modules/*
+
+VueJs/package-lock.json
