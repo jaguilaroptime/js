@@ -1,4 +1,18 @@
-const formulario = document.querySelector("form");
+new Vue({
+    el: "#app",
+    data: {
+        nuevaTarea: '',
+        tareas: [],
+    },
+    methods: {
+        guardarTarea(){
+            this.tareas.push(this.nuevaTarea);
+            this.nuevaTarea = '';
+        }
+    }
+});
+
+/*const formulario = document.querySelector("form");
 const ul = document.querySelector("ul");
 const input = document.querySelector("input[type='text']");
 const tareas = [];
@@ -13,5 +27,5 @@ formulario.onsubmit = evento => {
     input.value = null;
 
     console.log(tareas);
-}
+}*/
 
