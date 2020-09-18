@@ -1,38 +1,81 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+    <!-- <form v-on:submit.prevent="guardarTarea"> -->
+      <form>
+        <input type="text" v-model="nuevaTarea" @keyup="guardarTarea" placeholder="Add Task">
+        <input type="submit" value="Guardar tarea">
+    </form>
+    <br>
+    <input type="range" v-model="tiempo">{{ tiempo }}
+    <br>
+    <input type="search" v-model="busqueda" placeholder="Buscar tarea">
+    <hr>
+    <p v-for="(valor, propiedad) in usuario" :key="valor">
+      {{ valor }} : {{ propiedad }}
     </p>
-    <h3>Installed CLI Plugins</h3>
+    <hr>
     <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+      <li v-for="tarea in filtroTareas" :key="tarea.nombre">
+        {{ tarea.nombre }} - {{ tarea.tiempo }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+//Tradicional
+// window.onload = () => {
+//   const form = document.querySelector("form");
+//   const input = document.querySelector("input[type=text]");
+//   form.onsubmit = (evento) => {
+//     evento.preventDefault();
+//     this.tareas.unshift({
+//         nombre: input.value,
+//         tiempo: 10,
+//     });
+//     input.value = null;
+//   }
+// };
+
 export default {
   name: 'HelloWorld',
+  data: function () {
+    return {
+      nuevaTarea: '',
+      tiempo: 0,
+      busqueda: '',
+      usuario: {
+        username: 'Jeenson Aguilar',
+        role: 'admin'
+      },
+      tareas: [
+          {nombre: 'Aprender JavaScript moderno', tiempo: 3},
+          {nombre: 'Aprender Vue.js', tiempo: 7},
+          {nombre: 'Reparar el coche', tiempo: 22},
+          {nombre: 'Viajar más', tiempo: 16},
+          {nombre: 'Comprar la cena', tiempo: 12},
+          {nombre: 'Mejorar como desarrollador', tiempo: 9},
+          {nombre: 'Dar un curso', tiempo: 14},
+      ]
+    }
+  },
+  methods: {
+      guardarTarea() {
+        this.tareas.unshift({
+          nombre: this.nuevaTarea,
+          tiempo: Math.floor(Math.random() * 100),
+        });
+        // this.nuevaTarea = null;
+      }
+  },
+  computed: {
+    filtroTareas() {
+        return this.tareas.filter(tarea => {
+            return tarea.tiempo <= this.tiempo && tarea.nombre.includes(this.busqueda);
+        })
+    }
+  },
   props: {
     msg: String
   }
@@ -49,7 +92,7 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
+  /* display: inline-block; */
   margin: 0 10px;
 }
 a {
