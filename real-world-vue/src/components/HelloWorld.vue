@@ -2,9 +2,25 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <!-- <form v-on:submit.prevent="guardarTarea"> -->
-      <form>
+    <form>
         <input type="text" v-model="nuevaTarea" @keyup="guardarTarea" placeholder="Add Task">
         <input type="submit" value="Guardar tarea">
+        <label for="direccion">Dirección de envío</label>
+        <select id="direccion" v-model="direccion">
+          <option value="misma">Misma dirección que facturación</option>
+          <option value="nueva">Introducir nueva dirección</option>
+        </select>
+
+        <template v-if="direccion === 'nueva'">
+          <label for="nueva-direccion">Nueva dirección</label>
+          <textarea id="nueva-direccion"></textarea>
+        </template>
+
+        <div>
+          <input v-model="check" type="checkbox"><span>He leído y acepto la política de privacidad.</span>
+        </div>
+
+        <input v-if="check === true" type="submit" value="Enviar">
     </form>
     <br>
     <input type="range" v-model="tiempo">{{ tiempo }}
@@ -42,6 +58,8 @@ export default {
   name: 'HelloWorld',
   data: function () {
     return {
+      direccion: "misma",
+      check: false,
       nuevaTarea: '',
       tiempo: 0,
       busqueda: '',
@@ -92,7 +110,7 @@ ul {
   padding: 0;
 }
 li {
-  /* display: inline-block; */
+  display: inline-block;
   margin: 0 10px;
 }
 a {
