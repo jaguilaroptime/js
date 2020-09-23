@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <Binding/>
     <Axios/>
     <Filters/>
     <Fetch/>
@@ -13,6 +14,7 @@ import HelloWorld from './components/HelloWorld.vue';
 import Fetch from './components/fetch';
 import Filters from './components/filters';
 import Axios from './components/axios';
+import Binding from './components/binding';
 
 export default {
   name: 'App',
@@ -20,7 +22,8 @@ export default {
     HelloWorld,
     Fetch,
     Filters,
-    Axios
+    Axios,
+    Binding
   }
 }
 </script>
