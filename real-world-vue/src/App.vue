@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <Filters/>
     <Fetch/>
     <HelloWorld msg="Welcome Jaguilar"/>
   </div>
@@ -9,12 +10,14 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue';
 import Fetch from './components/fetch';
+import Filters from './components/filters';
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Fetch
+    Fetch,
+    Filters
   }
 }
 </script>
