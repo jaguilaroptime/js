@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <Axios/>
     <Filters/>
     <Fetch/>
     <HelloWorld msg="Welcome Jaguilar"/>
@@ -11,13 +12,15 @@
 import HelloWorld from './components/HelloWorld.vue';
 import Fetch from './components/fetch';
 import Filters from './components/filters';
+import Axios from './components/axios';
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
     Fetch,
-    Filters
+    Filters,
+    Axios
   }
 }
 </script>
